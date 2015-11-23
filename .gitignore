@@ -28,3 +28,9 @@ node_modules
 
 # Database files
 data/
+
+# Visual Studio Code Files
+.vscode/
+
+# tsd files
+typings/
