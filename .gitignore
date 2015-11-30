@@ -34,3 +34,6 @@ data/
 
 # tsd files
 typings/
+
+# ternjs files
+.tern-project

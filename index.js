@@ -1,32 +1,8 @@
-var mongodb = require('mongodb');
-var http = require('http');
+var server = require('./server');
 
-var uri = 'mongodb://localhost:27017/example';
+server.listen(3000);
+console.log('Server listening on port 3000...');
 
-mongodb.MongoClient.connect(uri, function(error, db) {
 
-    if (error) {
-        console.log(error);
-        process.exit(1);
-    }
 
-    db.collection('sample').insert({ x: 1 }, function(error, result) {
-        if (error) {
-            console.log(error);
-            process.exit(1);
-        }
 
-        db.collection('sample').find().toArray(function(error, docs) {
-            if (error) {
-                console.log(error);
-                process.exit(1);
-            }
-
-            console.log('Found Docs: ');
-            docs.forEach(function(doc) {
-                console.log(JSON.stringify(doc));
-            });
-            process.exit(0);
-        });
-    });
-});
