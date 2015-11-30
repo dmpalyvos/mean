@@ -4,7 +4,8 @@
       "watch": "gulp watch"
     },
     "dependencies": {
-        "mongodb": "2.0.35"
+        "mongodb": "2.0.35",
+        "mongoose": "~4.2.0"
     },
     "devDependencies": {
         "mocha": "2.2.4",
