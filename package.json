@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "gulp test",
+    "test": "mocha test",
     "watch": "gulp watch"
   },
   "dependencies": {
