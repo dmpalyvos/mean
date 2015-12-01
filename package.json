@@ -4,6 +4,7 @@
     "watch": "gulp watch"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
     "express": "~4.12.0",
     "http-status": "^0.2.0",
     "mongodb": "2.0.35",

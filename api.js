@@ -1,10 +1,13 @@
 var express = require('express');
 var status = require('http-status');
+var bodyparser = require('body-parser');
 
 module.exports = function(wagner) {
     
     var api = express.Router();
+    api.use(bodyparser.json());
     
+    //Helper Functions
     function handleOne(property, resp, error, result) {
         if (error) {
             return resp.
@@ -85,5 +88,42 @@ module.exports = function(wagner) {
         };
     }));
     
+    /*
+     * Update user cart
+     */
+    api.put('/me/cart', wagner.invoke(function(User) {
+        return function(req, res) {
+            try {
+                var cart = req.body.data.cart;
+            } 
+            catch (ex) {
+                return res.
+                    status(status.BAD_REQUEST).
+                    json( { error: 'No cart specified' } );
+            }
+            req.user.data.cart = cart;
+            req.user.save(function(error, user) {
+                if (error) {
+                    return res.
+                        status(status.INTERNAL_SERVER_ERROR).
+                        json( { error: error.toString() } );
+                }
+                return res.json( { user: user} );
+            });
+        };
+    }));
+    
+    api.get('/me', function(req, res) {
+        if (!req.user) {
+            return res.
+                status(status.UNAUTHORIZED).
+                json( { error: 'Not logged in' } );
+        }
+        
+        req.user.populate( 
+            { path: 'data.cart.product', model: 'Product' }, 
+            handleOne.bind(null, 'user', res));
+        
+    });
     return api;
 };
