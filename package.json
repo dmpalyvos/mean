@@ -8,6 +8,7 @@
     "http-status": "^0.2.0",
     "mongodb": "2.0.35",
     "mongoose": "~4.2.0",
+    "underscore": "^1.8.3",
     "wagner-core": "^0.2.0"
   },
   "devDependencies": {
