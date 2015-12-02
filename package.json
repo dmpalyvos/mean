@@ -6,9 +6,12 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "~4.12.0",
+    "express-session": "^1.12.1",
     "http-status": "^0.2.0",
     "mongodb": "2.0.35",
     "mongoose": "~4.2.0",
+    "passport": "^0.3.2",
+    "passport-github": "^1.0.0",
     "underscore": "^1.8.3",
     "wagner-core": "^0.2.0"
   },

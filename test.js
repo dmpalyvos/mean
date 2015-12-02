@@ -59,6 +59,10 @@ describe('API', function() {
             assert.ifError(error);
         });
 
+        User.remove({}, function(error) {
+            assert.ifError(error);
+        });
+
         //Set Categories
         var categories = [{
             _id: 'Electornics'
