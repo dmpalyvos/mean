@@ -256,5 +256,37 @@ describe('API', function() {
         done();
     });
 
+    it('can check out', function(done) {
+        var url = URL_ROOT + '/checkout';
 
+        User.findOne({}, function(error, user) {
+            assert.ifError(error);
+            user.data.cart = [{ product: PRODUCT_ID, quantity: 1 }];
+            user.save(function(error) {
+                assert.ifError(error);
+
+                //Attempt check out
+                //We don't actually use stripe so the data is dummy
+                superagent.
+                    post(url).
+                    send({
+                        stripeToken: {
+                            number: '1234123412341234',
+                            cvc: '123',
+                            exp_month: '12',
+                            exp_year: '2017'
+                        }
+                    }).
+                    end(function(error, res) {
+                        assert.equal(res.status, 200);
+                        var result;
+                        assert.doesNotThrow(function() {
+                            result = JSON.parse(res.text);
+                        });
+                        assert.ok(result.id);
+                    });
+            });
+        });
+        done();
+    });
 });
